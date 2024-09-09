@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Animated Timeline</title>
+    <style>
+        #chartdiv {
+            width: 100%;
+            height: 500px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="chartdiv"></div>
+    <script src="https://cdn.amcharts.com/lib/5/index.js"></script>
+    <script src="https://cdn.amcharts.com/lib/5/xy.js"></script>
+    <script src="https://cdn.amcharts.com/lib/5/themes/Animated.js"></script>
+
+    <script>
+        am5.ready(function () {
+            function formatDate(date) {
+                return date.getFullYear() + '-' +
+                    String(date.getMonth() + 1).padStart(2, '0') + '-' +
+                    String(date.getDate()).padStart(2, '0');
+            }
+
+            var root = am5.Root.new("chartdiv");
+            root.dateFormatter.setAll({
+                dateFormat: "yyyy-MM-dd",
+                dateFields: ["valueX", "openValueX"]
+            });
+
+            root.setThemes([am5themes_Animated.new(root)]);
+
+            var chart = root.container.children.push(
+                am5xy.XYChart.new(root, {
+                    panX: false,
+                    panY: false,
+                    wheelX: "panX",
+                    wheelY: "zoomX",
+                    layout: root.verticalLayout
+                })
+            );
+
+            var colors = chart.get("colors");
+            var categories = [
+
+                // { category: "Tut" },
+                { category: "Tasks" },
+                { category: "Reqs-plan" },
+                { category: "Sprint-Demo" },
+                { category: "Modules" },
+                //{ category: "Topics" }
+            ];
+
+            var data = [
+
+
+
+                {
+                    category: categories[0].category, task: "Git Basics Tutorial", start: new Date("2024-09-16").getTime(), end: new Date("2024-09-21").getTime(), columnSettings: {
+                        fill: am5.Color.brighten(colors.getIndex(1), 0)
+                    }
+                },
+                {
+                    category: categories[0].category, task: "PERN CRUD Tutorial & gitflow", start: new Date("2024-09-23").getTime(), end: new Date("2024-10-12").getTime(), columnSettings: {
+                        fill: am5.Color.brighten(colors.getIndex(1), 0)
+                    }
+                },
+                {
+                    category: categories[1].category, task: "App Enhancement Task", start: new Date("2024-09-30").getTime(), end: new Date("2024-10-12").getTime(), columnSettings: {
+                        fill: am5.Color.brighten(colors.getIndex(7), 0)
+                    }
+                },
+                {
+                    category: categories[1].category, task: "Assessed Submission", start: new Date("2024-10-11").getTime(), end: new Date("2024-10-12").getTime(), columnSettings: {
+                        fill: am5.Color.brighten(colors.getIndex(7), 1)
+                    }
+                },
+                {
+                    category: categories[1].category, task: "Git Basics Task", start: new Date("2024-09-16").getTime(), end: new Date("2024-09-21").getTime(), columnSettings: {
+                        fill: am5.Color.brighten(colors.getIndex(7), 0)
+                    }
+                },
+
+                {
+                    category: categories[2].category, task: "Project on Moqups (must-have)", start: new Date("2024-10-07").getTime(), end: new Date("2024-10-12").getTime(), columnSettings: {
+                        fill: am5.Color.brighten(colors.getIndex(8), 1)
+                    }
+                },
+
+                {
+                    category: categories[2].category, task: "Sync with project setup & Integrate", start: new Date("2024-10-14").getTime(), end: new Date("2024-10-19").getTime(), columnSettings: {
+                        fill: am5.Color.brighten(colors.getIndex(8), 1)
+                    }
+                },
+                {
+                    category: categories[2].category, task: "Refine & submit Sprint 1 plan", start: new Date("2024-10-21").getTime(), end: new Date("2024-10-25").getTime(), columnSettings: {
+                        fill: am5.Color.brighten(colors.getIndex(8), 1)
+                    }
+                },
+                {
+                    category: categories[2].category, task: "Assessed Submission", start: new Date("2024-10-25").getTime(), end: new Date("2024-10-26").getTime(), columnSettings: {
+                        fill: am5.Color.brighten(colors.getIndex(8), 0)
+                    }
+                },
+                {
+                    category: categories[3].category, task: "Sprint 1 Active", start: new Date("2024-10-28").getTime(), end: new Date("2024-11-8").getTime(), columnSettings: {
+                        fill: am5.Color.brighten(colors.getIndex(8), 1)
+                    }
+                },
+                {
+                    category: categories[3].category, task: "Assessed Submission", start: new Date("2024-11-8").getTime(), end: new Date("2024-11-9").getTime(), columnSettings: {
+                        fill: am5.Color.brighten(colors.getIndex(8), 0)
+                    }
+                },
+                {
+                    category: categories[2].category, task: "Sprint 2 plan & Retro", start: new Date("2024-11-11").getTime(), end: new Date("2024-11-16").getTime(), columnSettings: {
+                        fill: am5.Color.brighten(colors.getIndex(8), 1)
+                    }
+                },
+
+                {
+                    category: categories[1].category, task: "Testing task", start: new Date("2024-11-11").getTime(), end: new Date("2024-11-16").getTime(), columnSettings: {
+                        fill: am5.Color.brighten(colors.getIndex(7), 0)
+                    }
+                },
+                {
+                    category: categories[0].category, task: "Automated Testing tutorial", start: new Date("2024-11-4").getTime(), end: new Date("2024-11-16").getTime(), columnSettings: {
+                        fill: am5.Color.brighten(colors.getIndex(1), 0)
+                    }
+                },
+
+
+                {
+                    category: categories[3].category, task: "Sprint 2 Active", start: new Date("2024-11-18").getTime(), end: new Date("2024-11-29").getTime(), columnSettings: {
+                        fill: am5.Color.brighten(colors.getIndex(8), 1)
+                    }
+                },
+                {
+                    category: categories[3].category, task: "Assessed Submission", start: new Date("2024-11-29").getTime(), end: new Date("2024-11-30").getTime(), columnSettings: {
+                        fill: am5.Color.brighten(colors.getIndex(8), 0)
+                    }
+                },];
+
+            var yAxis = chart.yAxes.push(
+                am5xy.CategoryAxis.new(root, {
+                    categoryField: "category",
+                    renderer: am5xy.AxisRendererY.new(root, {
+                        minGridDistance: 10,
+                        inversed: true
+                    }),
+                    tooltip: am5.Tooltip.new(root, {})
+                })
+            );
+
+            var xAxis = chart.xAxes.push(
+                am5xy.DateAxis.new(root, {
+                    baseInterval: { timeUnit: "day", count: 1 },
+                    renderer: am5xy.AxisRendererX.new(root, {}),
+                    tooltip: am5.Tooltip.new(root, {})
+                })
+            );
+
+            var series = chart.series.push(am5xy.ColumnSeries.new(root, {
+                xAxis: xAxis,
+                yAxis: yAxis,
+                openValueXField: "start",
+                valueXField: "end",
+                categoryYField: "category",
+                sequencedInterpolation: true
+            }));
+
+            series.columns.template.setAll({
+                templateField: "columnSettings",
+                strokeOpacity: 0,
+                tooltipText: "{task}:\n[bold]{openValueX}[/] - [bold]{valueX}[/]"
+            });
+
+            series.bullets.push(function (root, series, dataItem) {
+                return am5.Bullet.new(root, {
+                    locationX: 0.5,
+                    sprite: am5.Label.new(root, {
+                        text: "{task}",
+                        centerX: am5.p50,
+                        centerY: am5.p50,
+                        fill: am5.color(0xffffff),
+                        populateText: true
+                    })
+                });
+            });
+
+            // Set data
+            series.data.setAll(data);
+            yAxis.data.setAll(data);
+
+            var firstDate = new Date(data[0].start);
+            var lastDate = new Date(data[data.length - 1].end);
+
+            // Label for current date
+            var label = chart.plotContainer.children.push(am5.Label.new(root, {
+                text: formatDate(firstDate),
+                fontSize: "2em",
+                fill: am5.color(0x000000),
+                opacity: 0.5,
+                x: am5.p50,
+                y: 40,
+                centerX: am5.p50,
+            }));
+
+            // Create controls
+            var container = chart.children.push(am5.Container.new(root, {
+                y: am5.p100,
+                centerX: am5.p50,
+                centerY: am5.p100,
+                x: am5.p50,
+                width: am5.percent(90),
+                layout: root.horizontalLayout,
+                paddingBottom: 10
+            }));
+
+            var playButton = container.children.push(am5.Button.new(root, {
+                themeTags: ["play"],
+                centerY: am5.p50,
+                marginRight: 20,
+                icon: am5.Graphics.new(root, {
+                    themeTags: ["icon"]
+                })
+            }));
+
+            var slider = container.children.push(am5.Slider.new(root, {
+                orientation: "horizontal",
+                start: 0,
+                centerY: am5.p50
+            }));
+
+            var animation;
+            playButton.events.on("click", function () {
+                if (playButton.get("active")) {
+                    if (animation) {
+                        animation.stop();
+                    }
+                    playButton.set("active", false);
+                } else {
+                    playButton.set("active", true);
+                    animation = slider.animate({
+                        key: "start",
+                        to: 1,
+                        duration: 15000 * (1 - slider.get("start"))
+                    });
+                }
+            });
+
+            slider.on("start", function (start) {
+                if (start === 1) {
+                    playButton.set("active", false);
+                    if (animation) {
+                        animation.stop();
+                    }
+                }
+            });
+
+            slider.events.on("rangechanged", function () {
+                updateChart(
+                    new Date(firstDate.getTime() + (lastDate.getTime() - firstDate.getTime()) * slider.get("start", 0))
+                );
+            });
+
+            function updateChart(date) {
+                var filteredData = data.filter(function (item) {
+                    return new Date(item.start) <= date && new Date(item.end) >= date;
+                });
+
+                series.data.setAll(filteredData);
+                label.set("text", formatDate(date));
+            }
+
+            // Set initial data
+            updateChart(firstDate);
+
+            // Make stuff animate on load
+            series.appear(1000);
+            chart.appear(1000, 100);
+        });
+    </script>
+</body>
+
+</html>

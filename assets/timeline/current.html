@@ -1,0 +1,639 @@
+<head>
+    <script src="https://kit.fontawesome.com/de4dc6c465.js" crossorigin="anonymous"></script>
+</head>
+<style>
+    #chartdiv {
+        width: 100%;
+        height: 500px;
+    }
+
+    .icon-grid {
+        gap: 20px;
+        margin-top: 10px;
+    }
+
+    .icon-item {
+        font-size: 30px;
+        padding: 10px;
+        vertical-align: bottom;
+
+    }
+
+    .icon-img {
+        padding: 10px;
+        width: 15%;
+        height: 15%;
+        vertical-align: top;
+    }
+
+    .container {
+        width: 100%;
+        height: 100px;
+        display: inline-block;
+        vertical-align: top;
+        padding: 10px;
+        border-left: 1px solid #ddd;
+        background-color: #f9f9f9;
+    }
+
+
+    .task-title1 {
+        font-size: 16px;
+        font-weight: bold;
+        padding: 5px;
+    }
+
+    .task-title2 {
+        font-size: 14px;
+        margin-bottom: 10px;
+        padding: 5px;
+    }
+
+    .task-dates {
+        font-size: 12px;
+        color: #666;
+        margin-bottom: 10px;
+        padding: 10px;
+    }
+
+    .module-panel {
+        font-family: 'Roboto', Arial, sans-serif;
+        background-color: hsla(0, 15%, 92%, 0.506);
+        border-radius: 8px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        padding: 10px;
+        max-width: 100%;
+        width: 100%;
+        transition: box-shadow 0.3s ease;
+    }
+
+    .module-panel:hover {
+        box-shadow: 0 10px 15px rgba(0, 0, 0, 0.2);
+    }
+
+
+    .info-row {
+        display: flex;
+        align-items: center;
+        margin-bottom: 12px;
+        color: #555;
+    }
+
+    .info-row svg {
+        width: 20px;
+        height: 20px;
+        margin-right: 8px;
+    }
+
+    .badges {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin-bottom: 16px;
+    }
+
+    .badge {
+        background-color: #e6f0ff;
+        color: #0066cc;
+        padding: 4px 8px;
+        border-radius: 16px;
+        font-size: 14px;
+    }
+
+    .practices {
+        margin-bottom: 16px;
+    }
+
+    .practices h3,
+    .description h3 {
+        font-size: 18px;
+        color: #444;
+        margin-bottom: 8px;
+    }
+
+    .practices ul {
+        padding-left: 20px;
+        color: #555;
+    }
+
+    .description {
+        border-top: 1px solid #eee;
+        padding-top: 16px;
+        margin-top: 16px;
+    }
+
+    .description p {
+        color: #555;
+        line-height: 1.6;
+    }
+
+    .learn-more {
+        background-color: #0066cc;
+        color: white;
+        border: none;
+        padding: 10px 16px;
+        border-radius: 4px;
+        font-size: 16px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+
+    .learn-more:hover {
+        background-color: #0052a3;
+    }
+</style>
+
+<!-- Resources -->
+<script src="https://cdn.amcharts.com/lib/5/index.js"></script>
+<script src="https://cdn.amcharts.com/lib/5/xy.js"></script>
+<script src="https://cdn.amcharts.com/lib/5/themes/Animated.js"></script>
+
+<!-- Chart code -->
+<script>
+
+    let week = 0;
+
+    am5.ready(function () {
+
+
+        // Create root element
+        // https://www.amcharts.com/docs/v5/getting-started/#Root_element
+        var root = am5.Root.new("chartdiv");
+        root.dateFormatter.setAll({
+            dateFormat: "yyyy-MM-dd",
+            dateFields: ["valueX", "openValueX"]
+        });
+
+
+        // Set themes
+        // https://www.amcharts.com/docs/v5/concepts/themes/
+        root.setThemes([
+            am5themes_Animated.new(root)
+        ]);
+
+
+        // Create chart
+        // https://www.amcharts.com/docs/v5/charts/xy-chart/
+        var chart = root.container.children.push(am5xy.XYChart.new(root, {
+            panX: false,
+            panY: false,
+            wheelX: "panX",
+            wheelY: "zoomX",
+            paddingLeft: 0,
+            layout: root.verticalLayout
+        }));
+
+
+
+        // Add legend
+        // https://www.amcharts.com/docs/v5/charts/xy-chart/legend-xy-series/
+        var legend = chart.children.push(am5.Legend.new(root, {
+            centerX: am5.p50,
+            x: am5.p50
+        }))
+
+        var colors = chart.get("colors");
+        var categories = [
+
+            { category: "Tutorials" },
+            { category: "Practice Tasks " },
+            { category: "Requirements \n & planning" },
+            { category: "Sprint Work \n & Demo" },
+            { category: "Modules" }
+            // { category: "Topics" }
+        ];
+
+        all_data = [];
+
+        all_data[0] = [{
+            category:
+                categories[0].category,
+            icons: [
+                'fa fa-git',
+                'fa fa-github',
+                'fa fa-slack',
+
+            ],
+            imgs: [
+                'https://opit.instructure.com/courses/293/files/9610/preview'
+            ],
+            task: "Git Basics Tutorial",
+            start: new Date("2024-09-16").getTime(),
+            end: new Date("2024-09-21").getTime(),
+            columnSettings: {
+                fill: am5.Color.brighten(colors.getIndex(1), 0)
+            },
+
+
+        }
+            ,
+        {
+            category: categories[1].category,
+            icons: [
+                'fa fa-git',
+                'fa fa-github',
+                'fa fa-medal '
+            ],
+            task: "Git Basics Task 🏅", start: new Date("2024-09-16").getTime(), end: new Date("2024-09-21").getTime(), columnSettings: {
+                fill: am5.Color.brighten(colors.getIndex(7), 0)
+            }
+        }];
+
+
+        all_data[1] = [{
+            category: categories[0].category,
+            icons: [
+                'fa fa-git',
+                'fa fa-github',
+                'fa-solid fa-database',
+                'fa-solid fa-server',
+
+            ],
+            task: "PERN CRUD Tutorial", start: new Date("2024-09-23").getTime(), end: new Date("2024-09-30").getTime(), columnSettings: {
+                fill: am5.Color.brighten(colors.getIndex(1), 0)
+            }
+        }]
+
+        all_data[2] = [{
+            category: categories[1].category,
+            icons: [
+                'fa fa-git',
+                'fa fa-github',
+                'fa-solid fa-medal',
+                'fa-solid fa-database',
+                'fa-solid fa-server',
+                'fa-solid fa-people-group'
+
+            ],
+            task: "App Enhancement Task 🏅🏅", start: new Date("2024-09-30").getTime(), end: new Date("2024-10-12").getTime(), columnSettings: {
+                fill: am5.Color.brighten(colors.getIndex(7), 0),
+            }
+        },
+        {
+            category: categories[1].category, task: "Assessed Submission", start: new Date("2024-10-11").getTime(), end: new Date("2024-10-12").getTime(), columnSettings: {
+                fill: am5.Color.brighten(colors.getIndex(7), 1)
+            }
+        }
+
+        ]
+
+        all_data[3] = [
+
+            {
+                category: categories[2].category, task: "Project on Moqups", start: new Date("2024-10-07").getTime(), end: new Date("2024-10-12").getTime(), columnSettings: {
+                    fill: am5.Color.brighten(colors.getIndex(8), 1)
+                }
+            }]
+
+        all_data[4] = [
+            {
+                category: categories[2].category, task: "Sync with project setup & Integrate", start: new Date("2024-10-14").getTime(), end: new Date("2024-10-19").getTime(), columnSettings: {
+                    fill: am5.Color.brighten(colors.getIndex(8), 1)
+                }
+            }]
+
+        all_data[5] = [
+
+            {
+                category: categories[2].category, task: "Refine & submit Sprint 1 plan", start: new Date("2024-10-21").getTime(), end: new Date("2024-10-25").getTime(), columnSettings: {
+                    fill: am5.Color.brighten(colors.getIndex(8), 1)
+                }
+            },
+            {
+                category: categories[2].category, task: "Assessed Submission", start: new Date("2024-10-25").getTime(), end: new Date("2024-10-26").getTime(), columnSettings: {
+                    fill: am5.Color.brighten(colors.getIndex(8), 0)
+                }
+            }]
+
+        all_data[6] = [
+
+            {
+                category: categories[3].category, task: "Sprint 1 Active", start: new Date("2024-10-28").getTime(), end: new Date("2024-11-8").getTime(), columnSettings: {
+                    fill: am5.Color.brighten(colors.getIndex(8), 1)
+                }
+            },
+
+
+            {
+                category: categories[3].category, task: "Assessed Submission", start: new Date("2024-11-8").getTime(), end: new Date("2024-11-9").getTime(), columnSettings: {
+                    fill: am5.Color.brighten(colors.getIndex(8), 0)
+                }
+            }]
+
+
+        all_data[8] = [
+
+            {
+                category: categories[2].category, task: "Sprint 2 plan & Retro", start: new Date("2024-11-11").getTime(), end: new Date("2024-11-16").getTime(), columnSettings: {
+                    fill: am5.Color.brighten(colors.getIndex(8), 1)
+                }
+            },
+
+            {
+                category: categories[1].category, task: "Testing task", start: new Date("2024-11-11").getTime(), end: new Date("2024-11-16").getTime(), columnSettings: {
+                    fill: am5.Color.brighten(colors.getIndex(7), 0)
+                }
+            }
+        ]
+        all_data[7] = [
+            {
+                category: categories[0].category, task: "Automated Testing tutorial", start: new Date("2024-11-4").getTime(), end: new Date("2024-11-16").getTime(), columnSettings: {
+                    fill: am5.Color.brighten(colors.getIndex(1), 0)
+                }
+            }]
+
+        all_data[9] = [
+            {
+                category: categories[3].category, task: "Sprint 2 Active", start: new Date("2024-11-18").getTime(), end: new Date("2024-11-29").getTime(), columnSettings: {
+                    fill: am5.Color.brighten(colors.getIndex(8), 1)
+                }
+            },
+            {
+                category: categories[3].category, task: "Assessed Submission", start: new Date("2024-11-29").getTime(), end: new Date("2024-11-30").getTime(), columnSettings: {
+                    fill: am5.Color.brighten(colors.getIndex(8), 0)
+                }
+            }
+            // Add more tasks here
+        ]
+
+
+        const topics = [
+            "Into & process & VCS & scrumban",
+            "UserStories & moqups & BBD & Restful & QA",
+            "Planning, project management & gitflow & how to review",
+            "Project specs, Agile Modelling:ERD and API Design",
+            "MVC, project setup, quality:CC",
+            "AOB backlog, in-class Sprint planning & Game",
+            "AOB sprint progress",
+            "Automated testing and its types, & TDD",
+            "Retrospective & Architecture Dependencies & S-2 planning",
+            "AOB progress",
+            "Deeper into CC, reflect on processes Sprint 2 Active",
+            "Project review & Demos & Retros",
+            "Ceremonies and group interview"
+        ];
+
+        const m_titles = [
+            "Module 1: An Introduction & Team Onboarding",
+            "Module 2: Agile Requirements & Tech Onboarding",
+            "Module 3: Agile Planning and Project Management",
+            "Module 4: Agile Modelling & Project Requirements",
+            "Module 5: MVC and Clean Code Principles",
+            "Module 6: Requirements Review & Sprint 1 planning",
+            "Module 7: Sprint 1 - Active",
+            "Module 8: Automated Testing & Sprint 1 Active",
+            "Module 9: Dependency Analysis & Sprint 2 Planning",
+            "Module 10: Managing Technical Dept & Sprint 2 Active",
+            "Module 11: Best Practices & Sprint 2 Active",
+            "Module 12: Project review and Retrospective",
+            "Module 13: Group assessments & Ceremony and Badges"
+        ];
+
+        var data = []
+
+
+        var startDate = new Date("2024-09-16T00:00:00");
+        for (var i = 0; i < 13; i++) {
+            var fromDate = new Date(startDate);
+            fromDate.setDate(fromDate.getDate() + (i * 7));
+            var toDate = new Date(fromDate);
+            toDate.setDate(toDate.getDate() + 6);
+
+            data.push({
+                category: "Modules",
+                task: "Week " + (i + 1),
+                start: fromDate.getTime(),
+                end: toDate.getTime(),
+                topic: topics[i],
+                m_title: m_titles[i],
+                columnSettings: {
+                    fill: am5.Color.brighten(colors.getIndex(13), 0)
+                }
+            });
+
+            if (all_data[i])
+                for (var k = 0; k < all_data[i].length; k++) {
+                    all_data[i][k].m_title = m_titles[i];
+                    data.push(all_data[i][k]);
+                }
+
+
+        }
+
+
+        // Create axes
+        // https://www.amcharts.com/docs/v5/charts/xy-chart/axes/
+
+        var yRenderer = am5xy.AxisRendererY.new(root, {
+            minorGridEnabled: true,
+            inversed: true,
+        });
+        yRenderer.grid.template.set("location", 1);
+
+        var yAxis = chart.yAxes.push(
+            am5xy.CategoryAxis.new(root, {
+                categoryField: "category",
+                renderer: yRenderer
+
+            })
+        );
+
+
+        yAxis.data.setAll(categories);
+
+
+
+        var xAxis = chart.xAxes.push(
+            am5xy.DateAxis.new(root, {
+                baseInterval: { timeUnit: "day", count: 1 },
+                renderer: am5xy.AxisRendererX.new(root, {
+                    strokeOpacity: 0.1,
+                    minorGridEnabled: true,
+                    minGridDistance: 80
+                })
+            })
+        );
+
+
+        // Add series
+        // https://www.amcharts.com/docs/v5/charts/xy-chart/series/
+        var series = chart.series.push(am5xy.ColumnSeries.new(root, {
+            xAxis: xAxis,
+            yAxis: yAxis,
+            openValueXField: "start",
+            valueXField: "end",
+            categoryYField: "category",
+            sequencedInterpolation: true
+
+        }));
+
+        series.bullets.push(function (root, series, dataItem) {
+            return am5.Bullet.new(root, {
+                locationX: 0.5,
+                sprite: am5.Label.new(root, {
+                    text: dataItem.dataContext.task,
+                    fontSize: "8px",
+                    fill: am5.color(0xffffff),
+                    centerX: am5.p50,
+                    centerY: am5.p50,
+                    //maxWidth: 120, // Adjust the width as needed
+                    wrap: true,
+                    truncate: false,
+                    oversizedBehavior: "wrap",
+                    textAlign: "center"
+                })
+            });
+        });
+
+        series.columns.template.setAll({
+            templateField: "columnSettings",
+            strokeOpacity: 0
+            //tooltipText: "{task}:\n[bold]{openValueX}[/] - [bold]{valueX}[/]"
+        });
+
+        series.columns.template.events.on("pointerover", function (ev) {
+            let dataItem = ev.target.dataItem.dataContext;
+            displayTaskInfo(dataItem);
+        });
+
+        //console.log(data);
+        series.data.setAll(data);
+
+        // Add scrollbars
+        chart.set("scrollbarX", am5.Scrollbar.new(root, { orientation: "horizontal" }));
+
+        var playButton = chart.children.push(am5.Button.new(root, {
+            themeTags: ["play"],
+            centerY: am5.p50,
+            marginRight: 20,
+            icon: am5.Graphics.new(root, {
+                themeTags: ["icon"]
+            })
+        }));
+
+        playButton.events.on("click", function () {
+            console.log(playButton.get("active"));
+            if (playButton.get("active")) {
+                slider.set("start", slider.get("start") + 0.1);
+            } else {
+                series.data.clear();
+                week = 0;
+                playButton.set("active", true);
+                slider.set("start", 0);
+                slider.animate({
+                    key: "start",
+                    to: 1,
+                    duration: 15000 * (1 - slider.get("start"))
+                });
+            }
+        });
+
+        var slider = chart.children.push(am5.Slider.new(root, {
+            orientation: "horizontal",
+            start: 0,
+            centerY: am5.p50
+        }));
+
+        slider.on("start", function (start) {
+            if (start === 1) {
+                playButton.set("active", false);
+            }
+        });
+
+        slider.events.on("rangechanged", function () {
+            if (slider.get("start") > (week / data.length)) {
+                updateSeriesData();
+            }
+        });
+
+        function updateSeriesData() {
+
+            if (week <= data.length) {
+                let dataItem = data[week];
+                console.log(week, data.length, dataItem);
+                series.data.push(dataItem);
+                displayTaskInfo(dataItem);
+
+                week++;
+            }
+        }
+
+        function displayTaskInfo(dataItem) {
+            const taskInfo = document.getElementById("taskinfo");
+            const iconGrid = document.getElementById('iconGrid');
+            //const imgGrid = document.getElementById('imgGrid');
+
+            // Clear previous icons
+            iconGrid.innerHTML = '';
+            //imgGrid.innerHTML = '';
+
+            // Add new icons if present
+            if (dataItem.icons && Array.isArray(dataItem.icons)) {
+                dataItem.icons.forEach(icon => {
+                    const iconElement = document.createElement('i');
+                    iconElement.className = icon + ' icon-item';
+                    iconGrid.appendChild(iconElement);
+                });
+            }
+
+            /*if (dataItem.imgs && Array.isArray(dataItem.imgs)) {
+                dataItem.imgs.forEach(img => {
+                    const imgElement = document.createElement('img');
+                    imgElement.src = img;
+                    imgElement.width = "25px";
+                    imgElement.height = "25px";
+
+                    imgElement.className = "icon-img";
+                    iconGrid.appendChild(imgElement);
+                });
+        }*/
+            // Add image if present
+
+            // Update task info
+            taskInfo.innerHTML = `
+        <div class="task-title1">${dataItem.m_title}</div>
+        <div class="task-title2">${dataItem.task}</div>
+      
+    `;
+        }
+
+        // Make stuff animate on load
+        // https://www.amcharts.com/docs/v5/concepts/animations/
+        series.appear();
+        chart.appear(1000, 100);
+
+        var milestoneDate = new Date("2024-10-12").getTime();  // Adjust milestone date here
+        var milestone = xAxis.makeDataItem({
+            value: milestoneDate
+        });
+
+        xAxis.createAxisRange(milestone);
+
+        milestone.get("grid").setAll({
+            stroke: am5.color(0xff0000),
+            strokeWidth: 5,
+            tooltipText: "Assessment 1"
+        });
+
+    }); // end am5.ready()
+
+
+
+</script>
+
+<!-- HTML -->
+
+<div id="chartdiv"></div>
+<div>
+    <table class="module-panel">
+        <td>
+            <div id="taskinfo">
+                <!-- Dynamic content will be inserted here -->
+            </div>
+            <div id="iconGrid">
+                <!-- Icons will be inserted here -->
+            </div>
+        </td>
+
+    </table>
+</div>
