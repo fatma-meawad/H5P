@@ -196,9 +196,9 @@
         var categories = [
 
             { category: "Tutorials" },
-            { category: "Practice Tasks " },
+            { category: "Tasks " },
             { category: "Requirements \n & planning" },
-            { category: "Sprint Work \n & Demo" },
+            { category: "Sprint Work \n & Demos" },
             { category: "Modules" }
             // { category: "Topics" }
         ];
@@ -246,8 +246,8 @@
                 'fa fa-git',
                 'fa fa-github',
                 'fa-solid fa-database',
-                'fa-solid fa-server',
-
+                'fa-brands fa-node',
+                'fa-brands fa-react',
             ],
             task: "PERN CRUD Tutorial", start: new Date("2024-09-23").getTime(), end: new Date("2024-09-30").getTime(), columnSettings: {
                 fill: am5.Color.brighten(colors.getIndex(1), 0)
@@ -262,16 +262,13 @@
                 'fa-solid fa-medal',
                 'fa-solid fa-database',
                 'fa-solid fa-server',
+                'fa-brands fa-node',
+                'fa-brands fa-react',
                 'fa-solid fa-people-group'
 
             ],
             task: "App Enhancement Task 🏅🏅", start: new Date("2024-09-30").getTime(), end: new Date("2024-10-12").getTime(), columnSettings: {
                 fill: am5.Color.brighten(colors.getIndex(7), 0),
-            }
-        },
-        {
-            category: categories[1].category, task: "Assessed Submission", start: new Date("2024-10-11").getTime(), end: new Date("2024-10-12").getTime(), columnSettings: {
-                fill: am5.Color.brighten(colors.getIndex(7), 1)
             }
         }
 
@@ -280,10 +277,23 @@
         all_data[3] = [
 
             {
-                category: categories[2].category, task: "Project on Moqups", start: new Date("2024-10-07").getTime(), end: new Date("2024-10-12").getTime(), columnSettings: {
+
+                category: categories[2].category, task: "", start: new Date("2024-10-07").getTime(), end: new Date("2024-10-26").getTime(), columnSettings: {
+
+                    //fill: am5.color(0xFFFFFF),  // White fill
+                    fill: am5.Color.brighten(colors.getIndex(8), 1),
+                    strokeWidth: 0.5,             // Border width
+                    strokeOpacity: am5.color(0x000000) // Border color (black in this example)
+                }
+
+            },
+            {
+
+                category: categories[2].category, task: "Project on Moqups", start: new Date("2024-10-07").getTime(), end: new Date("2024-10-13").getTime(), columnSettings: {
                     fill: am5.Color.brighten(colors.getIndex(8), 1)
                 }
-            }]
+            }
+        ]
 
         all_data[4] = [
             {
@@ -298,25 +308,13 @@
                 category: categories[2].category, task: "Refine & submit Sprint 1 plan", start: new Date("2024-10-21").getTime(), end: new Date("2024-10-25").getTime(), columnSettings: {
                     fill: am5.Color.brighten(colors.getIndex(8), 1)
                 }
-            },
-            {
-                category: categories[2].category, task: "Assessed Submission", start: new Date("2024-10-25").getTime(), end: new Date("2024-10-26").getTime(), columnSettings: {
-                    fill: am5.Color.brighten(colors.getIndex(8), 0)
-                }
             }]
 
         all_data[6] = [
 
             {
-                category: categories[3].category, task: "Sprint 1 Active", start: new Date("2024-10-28").getTime(), end: new Date("2024-11-8").getTime(), columnSettings: {
+                category: categories[3].category, task: "Sprint 1 Active", start: new Date("2024-10-28").getTime(), end: new Date("2024-11-9").getTime(), columnSettings: {
                     fill: am5.Color.brighten(colors.getIndex(8), 1)
-                }
-            },
-
-
-            {
-                category: categories[3].category, task: "Assessed Submission", start: new Date("2024-11-8").getTime(), end: new Date("2024-11-9").getTime(), columnSettings: {
-                    fill: am5.Color.brighten(colors.getIndex(8), 0)
                 }
             }]
 
@@ -344,19 +342,21 @@
 
         all_data[9] = [
             {
-                category: categories[3].category, task: "Sprint 2 Active", start: new Date("2024-11-18").getTime(), end: new Date("2024-11-29").getTime(), columnSettings: {
+                category: categories[3].category, task: "Sprint 2 Active", start: new Date("2024-11-18").getTime(), end: new Date("2024-11-30").getTime(), columnSettings: {
                     fill: am5.Color.brighten(colors.getIndex(8), 1)
-                }
-            },
-            {
-                category: categories[3].category, task: "Assessed Submission", start: new Date("2024-11-29").getTime(), end: new Date("2024-11-30").getTime(), columnSettings: {
-                    fill: am5.Color.brighten(colors.getIndex(8), 0)
                 }
             }
             // Add more tasks here
         ]
 
+        all_data[12] = [
+            {
 
+                category: categories[3].category, task: "Group Evaluations", start: new Date("2024-12-10").getTime(), end: new Date("2024-12-14").getTime(), columnSettings: {
+                    fill: am5.Color.brighten(colors.getIndex(8), 1)
+                }
+            }
+        ]
         const topics = [
             "Into & process & VCS & scrumban",
             "UserStories & moqups & BBD & Restful & QA",
@@ -427,14 +427,21 @@
         var yRenderer = am5xy.AxisRendererY.new(root, {
             minorGridEnabled: true,
             inversed: true,
+
+
         });
-        yRenderer.grid.template.set("location", 1);
+        yRenderer.grid.template.set("location", 0);
+        yRenderer.labels.template.set("fontSize", 9);
 
         var yAxis = chart.yAxes.push(
             am5xy.CategoryAxis.new(root, {
                 categoryField: "category",
-                renderer: yRenderer
-
+                renderer: yRenderer,
+                labels: {
+                    template: {
+                        fontSize: 8
+                    }
+                }
             })
         );
 
@@ -582,7 +589,7 @@
                     imgElement.src = img;
                     imgElement.width = "25px";
                     imgElement.height = "25px";
-
+    
                     imgElement.className = "icon-img";
                     iconGrid.appendChild(imgElement);
                 });
@@ -611,8 +618,50 @@
 
         milestone.get("grid").setAll({
             stroke: am5.color(0xff0000),
-            strokeWidth: 5,
-            tooltipText: "Assessment 1"
+            strokeWidth: 6,
+            tooltipText: "Assessment 1 15%"
+        });
+
+
+        milestoneDate = new Date("2024-10-26").getTime();  // Adjust milestone date here
+        milestone = xAxis.makeDataItem({
+            value: milestoneDate
+        });
+
+        xAxis.createAxisRange(milestone);
+
+        milestone.get("grid").setAll({
+            stroke: am5.color(0xff0000),
+            strokeWidth: 6,
+            tooltipText: "Assessment 2 15%"
+        });
+
+
+        milestoneDate = new Date("2024-11-09").getTime();  // Adjust milestone date here
+        milestone = xAxis.makeDataItem({
+            value: milestoneDate
+        });
+
+        xAxis.createAxisRange(milestone);
+
+        milestone.get("grid").setAll({
+            stroke: am5.color(0xff0000),
+            strokeWidth: 6,
+            tooltipText: "Assessment 3 30%"
+        });
+
+
+        milestoneDate = new Date("2024-11-30").getTime();  // Adjust milestone date here
+        milestone = xAxis.makeDataItem({
+            value: milestoneDate
+        });
+
+        xAxis.createAxisRange(milestone);
+
+        milestone.get("grid").setAll({
+            stroke: am5.color(0xff0000),
+            strokeWidth: 6,
+            tooltipText: "Assessment 4 40%"
         });
 
     }); // end am5.ready()
