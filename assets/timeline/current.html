@@ -59,6 +59,7 @@
     .module-panel {
         font-family: 'Roboto', Arial, sans-serif;
         background-color: hsla(0, 15%, 92%, 0.506);
+        background-color: #f4fbff;
         border-radius: 8px;
         box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         padding: 10px;
@@ -175,7 +176,6 @@
         // Create chart
         // https://www.amcharts.com/docs/v5/charts/xy-chart/
         var chart = root.container.children.push(am5xy.XYChart.new(root, {
-            panX: false,
             panY: false,
             wheelX: "panX",
             wheelY: "zoomX",
@@ -214,10 +214,8 @@
                 'fa fa-slack',
 
             ],
-            imgs: [
-                'https://opit.instructure.com/courses/293/files/9610/preview'
-            ],
             task: "Git Basics Tutorial",
+            link: "https://fuzzy-journey-v7y6oy5.pages.github.io/gitflow/",
             start: new Date("2024-09-16").getTime(),
             end: new Date("2024-09-21").getTime(),
             columnSettings: {
@@ -234,7 +232,9 @@
                 'fa fa-github',
                 'fa fa-medal '
             ],
-            task: "Git Basics Task 🏅", start: new Date("2024-09-16").getTime(), end: new Date("2024-09-21").getTime(), columnSettings: {
+            task: "Git Task: Engineer's Portfolio 🏅",
+            link: "https://opit.instructure.com/courses/293/assignments/1273?module_item_id=8766",
+            start: new Date("2024-09-16").getTime(), end: new Date("2024-09-21").getTime(), columnSettings: {
                 fill: am5.Color.brighten(colors.getIndex(7), 0)
             }
         }];
@@ -245,12 +245,28 @@
             icons: [
                 'fa fa-git',
                 'fa fa-github',
-                'fa-solid fa-database',
                 'fa-brands fa-node',
                 'fa-brands fa-react',
+
+            ],
+            imgs: [
+                '../visual-studio-code.png',
+                '../postgresql.png',
+                '../postman.png'
+
+
             ],
             task: "PERN CRUD Tutorial", start: new Date("2024-09-23").getTime(), end: new Date("2024-09-30").getTime(), columnSettings: {
                 fill: am5.Color.brighten(colors.getIndex(1), 0)
+            }
+        }, {
+            category: categories[2].category,
+            icons: [
+            ],
+            imgs: [
+            ],
+            task: "User Stories & Moqups", start: new Date("2024-09-23").getTime(), end: new Date("2024-09-27").getTime(), columnSettings: {
+                fill: am5.Color.brighten(colors.getIndex(3), 0)
             }
         }]
 
@@ -270,6 +286,15 @@
             task: "App Enhancement Task 🏅🏅", start: new Date("2024-09-30").getTime(), end: new Date("2024-10-12").getTime(), columnSettings: {
                 fill: am5.Color.brighten(colors.getIndex(7), 0),
             }
+        }, {
+            category: categories[2].category,
+            icons: [
+            ],
+            imgs: [
+            ],
+            task: "Gitflow & Kanban boards", start: new Date("2024-09-30").getTime(), end: new Date("2024-10-5").getTime(), columnSettings: {
+                fill: am5.Color.brighten(colors.getIndex(3), 0)
+            }
         }
 
         ]
@@ -281,7 +306,7 @@
                 category: categories[2].category, task: "", start: new Date("2024-10-07").getTime(), end: new Date("2024-10-26").getTime(), columnSettings: {
 
                     //fill: am5.color(0xFFFFFF),  // White fill
-                    fill: am5.Color.brighten(colors.getIndex(8), 1),
+                    fill: am5.Color.brighten(colors.getIndex(3), 0),
                     strokeWidth: 0.5,             // Border width
                     strokeOpacity: am5.color(0x000000) // Border color (black in this example)
                 }
@@ -290,7 +315,7 @@
             {
 
                 category: categories[2].category, task: "Project on Moqups", start: new Date("2024-10-07").getTime(), end: new Date("2024-10-13").getTime(), columnSettings: {
-                    fill: am5.Color.brighten(colors.getIndex(8), 1)
+                    fill: am5.Color.brighten(colors.getIndex(3), 0)
                 }
             }
         ]
@@ -298,7 +323,7 @@
         all_data[4] = [
             {
                 category: categories[2].category, task: "Sync with project setup & Integrate", start: new Date("2024-10-14").getTime(), end: new Date("2024-10-19").getTime(), columnSettings: {
-                    fill: am5.Color.brighten(colors.getIndex(8), 1)
+                    fill: am5.Color.brighten(colors.getIndex(3), 0)
                 }
             }]
 
@@ -306,7 +331,7 @@
 
             {
                 category: categories[2].category, task: "Refine & submit Sprint 1 plan", start: new Date("2024-10-21").getTime(), end: new Date("2024-10-25").getTime(), columnSettings: {
-                    fill: am5.Color.brighten(colors.getIndex(8), 1)
+                    fill: am5.Color.brighten(colors.getIndex(3), 0)
                 }
             }]
 
@@ -323,7 +348,7 @@
 
             {
                 category: categories[2].category, task: "Sprint 2 plan & Retro", start: new Date("2024-11-11").getTime(), end: new Date("2024-11-16").getTime(), columnSettings: {
-                    fill: am5.Color.brighten(colors.getIndex(8), 1)
+                    fill: am5.Color.brighten(colors.getIndex(3), 0)
                 }
             },
 
@@ -357,6 +382,8 @@
                 }
             }
         ]
+
+
         const topics = [
             "Into & process & VCS & scrumban",
             "UserStories & moqups & BBD & Restful & QA",
@@ -373,6 +400,21 @@
             "Ceremonies and group interview"
         ];
 
+        const descriptions = [
+            "The motivation for SE, the software crisis and the agile movement with a focus on Scrum. A quick intro to version control. Practice: Tutorial and git task practice.",
+            "Requirements Engineering with a focus on User stories and acceptance tests. The PERN technology stack.",
+            "An introduction to planning in scrum and Kanban boards in Github. Practice Git Flow and review practices.",
+            "Project requirements and agile modelling techniques starting with ERD and API design. The first assessment submission.",
+            "Understanding the most common architectural patterns in full stack web applications and the key principles of Clean Code.",
+            "Refining and Reviewing project requirements. An all on board sprint planning for Sprint .",
+            "No new content in Week 7 but, Sprint 1 has started.",
+            "Automated Testing (unit, integration and E2E testing. A discussion of TDD. This is the second week of sprint 1.",
+            "Decoupling Components, dependency analysis and components diagrams. Sprint 2 plan discussion.",
+            "Refactoring techniques and  Sprint 2 Progress discussion.",
+            "Best Practices in Security, design and development. ",
+            "Retrospective and reflecting on software processes.",
+            "Group assessments and final announcements of rewards."
+        ];
         const m_titles = [
             "Module 1: An Introduction & Team Onboarding",
             "Module 2: Agile Requirements & Tech Onboarding",
@@ -404,8 +446,8 @@
                 task: "Week " + (i + 1),
                 start: fromDate.getTime(),
                 end: toDate.getTime(),
-                topic: topics[i],
                 m_title: m_titles[i],
+                descrip: descriptions[i],
                 columnSettings: {
                     fill: am5.Color.brighten(colors.getIndex(13), 0)
                 }
@@ -414,6 +456,7 @@
             if (all_data[i])
                 for (var k = 0; k < all_data[i].length; k++) {
                     all_data[i][k].m_title = m_titles[i];
+                    all_data[i][k].descrip = descriptions[i];
                     data.push(all_data[i][k]);
                 }
 
@@ -452,6 +495,7 @@
 
         var xAxis = chart.xAxes.push(
             am5xy.DateAxis.new(root, {
+
                 baseInterval: { timeUnit: "day", count: 1 },
                 renderer: am5xy.AxisRendererX.new(root, {
                     strokeOpacity: 0.1,
@@ -470,7 +514,7 @@
             openValueXField: "start",
             valueXField: "end",
             categoryYField: "category",
-            sequencedInterpolation: true
+            sequencedInterpolation: true,
 
         }));
 
@@ -583,23 +627,25 @@
                 });
             }
 
-            /*if (dataItem.imgs && Array.isArray(dataItem.imgs)) {
-                dataItem.imgs.forEach(img => {
-                    const imgElement = document.createElement('img');
-                    imgElement.src = img;
-                    imgElement.width = "25px";
-                    imgElement.height = "25px";
-    
-                    imgElement.className = "icon-img";
-                    iconGrid.appendChild(imgElement);
+            if (dataItem.imgs && Array.isArray(dataItem.imgs)) {
+                dataItem.imgs.forEach(icon => {
+                    const iconElement = document.createElement('img');
+                    iconElement.className = ' icon-item';
+                    iconElement.src = icon;
+                    //iconElement.width = "50";
+                    iconGrid.appendChild(iconElement);
                 });
-        }*/
-            // Add image if present
+            }
+            var task = "";
+            if (dataItem.link)
+                task = "<a href='" + dataItem.link + "'>" + dataItem.task + "</a>"
+            else
+                task = dataItem.task;
 
-            // Update task info
             taskInfo.innerHTML = `
         <div class="task-title1">${dataItem.m_title}</div>
-        <div class="task-title2">${dataItem.task}</div>
+        <div class="task-title2">${dataItem.descrip}</div>
+        <div class="task-title2">${task}</div>
       
     `;
         }
@@ -664,9 +710,19 @@
             tooltipText: "Assessment 4 40%"
         });
 
+
+        xAxis.showOnInit = false;
+
+        chart.events.on("ready", function () {
+            xAxis.zoomToDates(
+                new Date(currentDate.getFullYear(), currentDate.getMonth(), 1),
+                new Date(currentDate.getFullYear(), currentDate.getMonth() + 2, 0)
+
+            );
+        });
+
+
     }); // end am5.ready()
-
-
 
 </script>
 
