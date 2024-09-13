@@ -284,6 +284,15 @@
             // Make stuff animate on load
             series.appear(1000);
             chart.appear(1000, 100);
+
+            var now = new Date();
+            var startOfMonth = new Date(now.getFullYear(), now.getMonth(), 1);
+            var endOfMonth = new Date(now.getFullYear(), now.getMonth() + 1, 0);
+
+            xAxis.events.once("datavalidated", function () {
+                xAxis.zoomToDates(startOfMonth, endOfMonth);
+            });
+
         });
     </script>
 </body>

@@ -21,8 +21,8 @@
 
     .icon-img {
         padding: 10px;
-        width: 15%;
-        height: 15%;
+        width: 50px;
+        height: 50px;
         vertical-align: top;
     }
 
@@ -153,7 +153,7 @@
 <script>
 
     let week = 0;
-
+    var xAxis;
     am5.ready(function () {
 
 
@@ -230,8 +230,13 @@
             icons: [
                 'fa fa-git',
                 'fa fa-github',
-                'fa fa-medal '
+                'fa fa-medal',
+
             ],
+            imgs: [
+                '../imgs/gbasics-3d.png'
+            ],
+
             task: "Git Task: Engineer's Portfolio 🏅",
             link: "https://opit.instructure.com/courses/293/assignments/1273?module_item_id=8766",
             start: new Date("2024-09-16").getTime(), end: new Date("2024-09-21").getTime(), columnSettings: {
@@ -493,7 +498,7 @@
 
 
 
-        var xAxis = chart.xAxes.push(
+        xAxis = chart.xAxes.push(
             am5xy.DateAxis.new(root, {
 
                 baseInterval: { timeUnit: "day", count: 1 },
@@ -542,7 +547,7 @@
             //tooltipText: "{task}:\n[bold]{openValueX}[/] - [bold]{valueX}[/]"
         });
 
-        series.columns.template.events.on("pointerover", function (ev) {
+        series.columns.template.events.on("click", function (ev) {
             let dataItem = ev.target.dataItem.dataContext;
             displayTaskInfo(dataItem);
         });
@@ -550,8 +555,16 @@
         //console.log(data);
         series.data.setAll(data);
 
+
+
+
+
+
         // Add scrollbars
-        chart.set("scrollbarX", am5.Scrollbar.new(root, { orientation: "horizontal" }));
+        var scrollbarX = chart.set("scrollbarX", am5.Scrollbar.new(root, { orientation: "horizontal" }));
+
+
+
 
         var playButton = chart.children.push(am5.Button.new(root, {
             themeTags: ["play"],
@@ -579,10 +592,12 @@
             }
         });
 
+
         var slider = chart.children.push(am5.Slider.new(root, {
             orientation: "horizontal",
             start: 0,
-            centerY: am5.p50
+            centerY: am5.p50,
+            visible: false
         }));
 
         slider.on("start", function (start) {
@@ -609,6 +624,8 @@
             }
         }
 
+
+
         function displayTaskInfo(dataItem) {
             const taskInfo = document.getElementById("taskinfo");
             const iconGrid = document.getElementById('iconGrid');
@@ -630,9 +647,8 @@
             if (dataItem.imgs && Array.isArray(dataItem.imgs)) {
                 dataItem.imgs.forEach(icon => {
                     const iconElement = document.createElement('img');
-                    iconElement.className = ' icon-item';
+                    iconElement.className = 'icon-img';
                     iconElement.src = icon;
-                    //iconElement.width = "50";
                     iconGrid.appendChild(iconElement);
                 });
             }
@@ -650,10 +666,16 @@
     `;
         }
 
+
+
+
         // Make stuff animate on load
         // https://www.amcharts.com/docs/v5/concepts/animations/
         series.appear();
         chart.appear(1000, 100);
+
+
+
 
         var milestoneDate = new Date("2024-10-12").getTime();  // Adjust milestone date here
         var milestone = xAxis.makeDataItem({
@@ -711,18 +733,11 @@
         });
 
 
-        xAxis.showOnInit = false;
-
-        chart.events.on("ready", function () {
-            xAxis.zoomToDates(
-                new Date(currentDate.getFullYear(), currentDate.getMonth(), 1),
-                new Date(currentDate.getFullYear(), currentDate.getMonth() + 2, 0)
-
-            );
-        });
-
-
     }); // end am5.ready()
+
+
+
+
 
 </script>
 
