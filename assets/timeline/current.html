@@ -153,7 +153,7 @@
 <script>
 
     let week = 0;
-    var xAxis;
+
     am5.ready(function () {
 
 
@@ -498,7 +498,7 @@
 
 
 
-        xAxis = chart.xAxes.push(
+        var xAxis = chart.xAxes.push(
             am5xy.DateAxis.new(root, {
 
                 baseInterval: { timeUnit: "day", count: 1 },
@@ -554,6 +554,15 @@
 
         //console.log(data);
         series.data.setAll(data);
+        // Get current month range
+        var now = new Date();
+        var startOfMonth = new Date(now.getFullYear(), now.getMonth(), 1);
+        var endOfMonth = new Date(now.getFullYear(), now.getMonth() + 1, 0);
+
+        // Zoom to the current month
+        xAxis.events.once("datavalidated", function () {
+            xAxis.zoomToDates(startOfMonth, endOfMonth);
+        });
 
 
 
