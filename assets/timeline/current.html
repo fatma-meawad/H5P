@@ -153,6 +153,7 @@
 <script>
 
     let week = 0;
+    let dIndex = 0;
 
     am5.ready(function () {
 
@@ -576,22 +577,36 @@
 
 
         var playButton = chart.children.push(am5.Button.new(root, {
-            themeTags: ["play"],
-            centerY: am5.p50,
+            label: am5.Label.new(root, {
+                text: "+"
+            }),
+            width: 50,
+            height: 50,
             marginRight: 20,
-            icon: am5.Graphics.new(root, {
-                themeTags: ["icon"]
-            })
+            fill: am5.color(0x000000),
+            fillOpacity: 0
         }));
 
-        playButton.events.on("click", function () {
-            console.log(playButton.get("active"));
-            if (playButton.get("active")) {
+        var stepButton = chart.children.push(am5.Button.new(root, {
+            label: am5.Label.new(root, {
+                text: ">"
+            }),
+            width: 50,
+            height: 50,
+            marginRight: 20,
+            fill: am5.color(0x000000),
+            fillOpacity: 0
+
+        }));
+
+
+        stepButton.events.on("click", function () {
+            if (stepButton.get("active")) {
                 slider.set("start", slider.get("start") + 0.1);
             } else {
                 series.data.clear();
                 week = 0;
-                playButton.set("active", true);
+                stepButton.set("active", true);
                 slider.set("start", 0);
                 slider.animate({
                     key: "start",
@@ -602,16 +617,22 @@
         });
 
 
+        playButton.events.on("click", function () {
+            if (week == 0)
+                series.data.clear();
+            updateSeriesData();
+
+        });
         var slider = chart.children.push(am5.Slider.new(root, {
             orientation: "horizontal",
             start: 0,
             centerY: am5.p50,
-            visible: false
+            visible: true
         }));
 
         slider.on("start", function (start) {
             if (start === 1) {
-                playButton.set("active", false);
+                stepButton.set("active", false);
             }
         });
 
@@ -623,15 +644,33 @@
 
         function updateSeriesData() {
 
-            if (week <= data.length) {
+            if (week < data.length) {
                 let dataItem = data[week];
                 console.log(week, data.length, dataItem);
                 series.data.push(dataItem);
                 displayTaskInfo(dataItem);
-
                 week++;
+                while (week < data.length) {
+                    dataItem = data[week];
+                    if (dataItem.category == "Modules")
+                        break;
+                    else {
+                        series.data.push(dataItem);
+                        displayTaskInfo(dataItem);
+                        week++;
+                    }
+                }
             }
+            else
+                week = 0;
+            playButton.set("active", true);
+
         }
+
+        //xAxis.zoomToDates(new Date(data[0].start), new Date(data[data.length - 1].end));
+
+
+
 
 
 
@@ -680,7 +719,7 @@
 
         // Make stuff animate on load
         // https://www.amcharts.com/docs/v5/concepts/animations/
-        series.appear();
+        series.appear(100);
         chart.appear(1000, 100);
 
 
@@ -752,17 +791,17 @@
 
 <!-- HTML -->
 
-<div id="chartdiv"></div>
-<div>
-    <table class="module-panel">
-        <td>
-            <div id="taskinfo">
-                <!-- Dynamic content will be inserted here -->
-            </div>
-            <div id="iconGrid">
-                <!-- Icons will be inserted here -->
-            </div>
-        </td>
+<div></div>
+<table class="module-panel">
+    <td>
+        <div id="taskinfo">
+            <!-- Dynamic content will be inserted here -->
+        </div>
+        <div id="iconGrid">
+            <!-- Icons will be inserted here -->
+        </div>
+    </td>
 
-    </table>
+</table>
 </div>
+<div id="chartdiv"></div>
